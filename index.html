@@ -657,7 +657,7 @@ body.fade-in {
 
 
 <!-- GIFTS PAGE -->
-<section>
+<section id="gifts">
   <h1>Choose Your Gifts 🎁</h1>
 
   <div class="gifts">
@@ -708,7 +708,7 @@ body.fade-in {
     <button onclick="next()">Best Friends ❤️</button>
     <button onclick="next()">All of the above 😊</button>
   </div>
-  <button class="cute-btn" onclick="backToGifts()">⬅ Back</button>
+  <button class="cute-btn" onclick="go('gifts')">⬅ Back</button>
 </section>
 
 <section id="quiz">
@@ -843,7 +843,7 @@ body.fade-in {
 </div>
 
 
-    <button class="cute-btn ghost" onclick="backToGifts()">← Back</button>
+    <button class="cute-btn ghost" onclick="go('gifts')">← Back</button>
 </section>
 
 
@@ -864,7 +864,7 @@ body.fade-in {
       to come.
     </p>
   </div>
-  <button class="cute-btn" onclick="backToGifts()">⬅ Back</button>
+  <button class="cute-btn" onclick="go('gifts')">⬅ Back</button>
 </section>
 
 <!-- FINAL -->
@@ -913,16 +913,31 @@ function next() {
 
 
 function go(id) {
+  // remove active from current section
   sections[i].classList.remove("active");
-  i = [...sections].findIndex(s => s.id === id);
+
+  // find target section safely
+  const index = [...sections].findIndex(s => s.id === id);
+
+  // if id not found, stay on current section
+  if (index === -1) {
+    console.warn("Section not found:", id);
+    sections[i].classList.add("active");
+    return;
+  }
+
+  // switch to new section
+  i = index;
   sections[i].classList.add("active");
 
+  // hearts only on final page
   if (id === "final") {
     startHearts();
   } else {
     stopHearts();
   }
 }
+
 
 
 
@@ -1093,6 +1108,7 @@ function checkLogin() {
 
 </body>
 </html>
+
 
 
 
