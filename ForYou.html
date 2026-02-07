@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+
+<title>For You ❤️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+}
+
+section {
+  min-height: 100vh;
+  display: none;
+  padding: 30px 20px;
+  animation: fade 0.5s ease;
+}
+
+section.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 { font-size: 2rem; }
+p { font-size: 1.05rem; }
+
+button {
+  background: #fff;
+  color: #ff4b6e;
+  border: none;
+  padding: 14px 22px;
+  border-radius: 30px;
+  font-size: 1rem;
+  margin: 12px;
+  cursor: pointer;
+}
+
+.cute-btn {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  border-radius: 18px;
+  display: inline-block;
+  width: 200px;
+  min-width: unset;
+  margin: 12px auto;   /* ⭐ THIS centers it */
+  display: block;      /* ⭐ IMPORTANT */
+}
+
+
+.options button {
+  display: block;
+  width: 80%;
+  max-width: 300px;
+  margin: 10px auto;
+}
+
+/* 🎁 Gifts */
+.gifts {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.flip {
+  perspective: 1000px;
+}
+
+.gift-inner {
+  width: 120px;
+  height: 120px;
+  transform-style: preserve-3d;
+  transition: 0.8s;
+}
+
+.flip:hover .gift-inner {
+  transform: rotateY(180deg);
+}
+
+.gift-front,
+.gift-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.25);
+  backface-visibility: hidden;
+  font-size: 2.5rem;
+}
+
+.gift-back {
+  transform: rotateY(180deg);
+  font-size: 1rem;
+}
+
+/* 📸 Slideshow */
+.slideshow {
+  width: 85%;
+  max-width: 320px;
+  height: 320px;
+  margin: 20px auto;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: 0.8s;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+/* ❤️ Hearts */
+#hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 999;
+}
+
+.heart {
+  position: absolute;
+  bottom: -10px;
+  font-size: 22px;
+  animation: floatUp 4s linear forwards;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+
+
+
+@keyframes float {
+  to {
+    transform: translateY(-110vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes fade {
+  from {opacity:0; transform:translateY(10px);}
+  to {opacity:1;}
+}
+
+.cute-btn {
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.cute-btn:active {
+  transform: scale(0.92);
+}
+
+.pop-heart {
+  position: absolute;
+  font-size: 22px;
+  animation: popHeart 0.8s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes popHeart {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-30px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+.card {
+  background-color: #4b1e2a !important;
+  border-radius: 22px;
+  padding: 26px 22px 30px;
+  max-width: 520px;
+  margin: 24px auto;
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.25);
+  animation: cardEnter 0.8s ease forwards;
+  position: relative;
+  animation-delay: 0.2s;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.card::before {
+  content: "💗 💕 💗 💕 💗";
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.9rem;
+  background: #ffb6c1;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+#letter .card p {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.15rem;
+  letter-spacing: 0.5px;
+}
+
+
+
+/* entrance animation */
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* gentle floating */
+@keyframes floatCard {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+#final {
+  text-align: center;
+  animation: finalFade 1s ease forwards;
+}
+
+.final-title {
+  font-size: 2.2rem;
+  animation: popIn 0.6s ease forwards;
+}
+
+.final-text {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes finalFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+
+.promise {
+  margin-top: 22px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.promise.show {
+  animation: fadeUp 1.5s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.section-title {
+  margin-top: 30px;
+  font-size: 28px;
+  color: #fff;
+}
+
+.photo-card {
+  width: 240px;
+  height: 420px;
+  margin: 30px auto;
+  border-radius: 26px;
+  overflow: hidden;
+  position: relative;
+  background: #fff;
+  box-shadow: 0 20px 45px rgba(255, 120, 150, 0.35);
+}
+
+.photo-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.photo-card img.active {
+  opacity: 1;
+}
+
+
+.carousel {
+  position: relative;
+  height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.carousel-stage {
+  position: relative;
+  width: 260px;
+  height: 420px;
+}
+
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 26px;
+  object-fit: cover;
+
+  opacity: 0;
+  transform: scale(0.85);
+  filter: blur(6px);
+  transition: all 0.6s ease;
+
+  z-index: 1;
+}
+
+/* CENTER photo */
+.photo.center {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+  z-index: 3;
+
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+
+/* LEFT photo */
+.photo.left {
+  opacity: 1;
+  transform: translateX(-60px) scale(0.88);
+  filter: blur(5px);
+  z-index: 2;
+}
+
+/* RIGHT photo */
+.photo.right {
+  opacity: 1;
+  transform: translateX(60px) scale(0.88);
+  filter: blur(5px);
+  z-index: 2;
+}
+
+
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+
+  background: rgba(255, 255, 255, 0.95);
+  color: #ff4d88;
+  font-size: 22px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  z-index: 5;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.arrow.left { left: 14px; }
+.arrow.right { right: 14px; }
+
+.arrow:active {
+  transform: translateY(-50%) scale(0.9);
+}
+
+
+@media (max-width: 480px) {
+  .photo {
+    width: 200px;
+    height: 350px;
+  }
+}
+
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 25px 50px rgba(255, 105, 150, 0.45);
+  }
+  50% {
+    box-shadow: 0 25px 60px rgba(255, 105, 150, 0.65);
+  }
+  100% {
+    box-shadow: 0 25px 50px rgba(255, 105, 150, 0.45);
+  }
+}
+
+
+.sparkle {
+  position: absolute;
+  font-size: 26px;   /* 💖 bigger */
+  pointer-events: none;
+  animation: sparklePop 0.9s ease forwards;
+}
+
+
+@keyframes sparklePop {
+  0% {
+    transform: scale(0.4) translateY(0);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(1.3) translateY(-20px);
+  }
+  100% {
+    transform: scale(1.6) translateY(-40px);
+    opacity: 0;
+  }
+}
+
+
+.home-btn {
+  margin: 30px auto 0;
+  display: block;
+
+  padding: 10px 18px;
+  font-size: 14px;
+
+  border-radius: 999px;
+  border: none;
+
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffd6e3;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.home-btn:active {
+  transform: scale(0.95);
+}
+
+
+.final-card {
+  max-width: 320px;
+  padding: 28px;
+  margin: 80px auto 40px;
+
+  border-radius: 26px;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 120, 160, 0.85),
+    rgba(160, 80, 120, 0.85)
+  );
+
+  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+}
+
+.promise {
+  margin-top: 22px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+
+  animation: fadeUp 1.2s ease forwards;
+}
+
+
+body.fade-out {
+  animation: fadeOut 0.5s ease forwards;
+}
+
+body.fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+.home-btn:active {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+</style>
+</head>
+
+
+
+<body>
+
+<!-- INTRO -->
+<section id="intro" class="active">
+  <h1>Hey Aammiiii... ❤️</h1>
+  <p>I made something just for you…</p>
+  <button class="cute-btn" onclick="next()">Start 💌</button>
+</section>
+
+
+<!-- GIFTS PAGE -->
+<section>
+  <h1>Choose Your Gifts 🎁</h1>
+
+  <div class="gifts">
+    <div class="flip" onclick="go('quiz')">
+      <div class="gift-inner">
+        <div class="gift-front">🎁</div>
+        <div class="gift-back">Quiz 💕</div>
+      </div>
+    </div>
+
+    <div class="flip" onclick="go('photos')">
+      <div class="gift-inner">
+        <div class="gift-front">🎁</div>
+        <div class="gift-back">Us 📸</div>
+      </div>
+    </div>
+
+    <div class="flip" onclick="go('letter')">
+      <div class="gift-inner">
+        <div class="gift-front">🎁</div>
+        <div class="gift-back">For You 💌</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="cute-btn" onclick="go('final')">Next ❤️</button>
+</section>
+
+<!-- GIFT 1: QUIZ -->
+<section id="quiz">
+  <h1>Quick Question 😘</h1>
+  <p>What are we?</p>
+  <div class="options">
+    <button onclick="next()">Best couple ever 🥰</button>
+    <button onclick="next()">Soulmates 💫</button>
+    <button onclick="next()">Best Friends ❤️</button>
+    <button onclick="next()">All of the above 😊</button>
+  </div>
+  <button class="cute-btn" onclick="backToGifts()">⬅ Back</button>
+</section>
+
+<section id="quiz">
+  <h1>Tiny but important 🍓</h1>
+  <p>What’s my favorite thing about you?</p>
+  <div class="options">
+    <button onclick="next()">Your smile 😍</button>
+    <button onclick="next()">Your cute anger 😤❤️</button>
+    <button onclick="next()">You know what i think next 🌚 </button>
+    <button onclick="next()">Literally everything 😌</button>
+  </div>
+</section>
+
+<section id="quiz">
+  <h1>This is easy 💭</h1>
+  <p>What do we do best together?</p>
+  <div class="options">
+    <button onclick="next()">Laugh at nothing 😂</button>
+    <button onclick="next()">Annoy each other 😜</button>
+    <button onclick="next()">Love each other 🥰</button>
+  </div>
+</section>
+
+<section id="quiz">
+  <h1>Soft moment ☁️</h1>
+  <p>How do I feel when I’m with you?</p>
+  <div class="options">
+    <button onclick="next()">Safe 🤍</button>
+    <button onclick="next()">Happy 🌈</button>
+    <button onclick="next()">Home 🏠</button>
+    <button onclick="next()">All of the above 💖</button>
+  </div>
+</section>
+
+
+<section id="quiz">
+  <h1>Don’t think too much 😋</h1>
+  <p>WWho is more clingy?</p>
+  <div class="options">
+    <button onclick="next()">You 🫣</button>
+    <button onclick="next()">Me 🙈</button>
+    <button onclick="next()">Both (obviously) 😭</button>
+  </div>
+</section>
+
+
+<section id="quiz">
+  <h1>Pookie check 🐻</h1>
+  <p>What do I become when I’m with you?</p>
+  <div class="options">
+    <button onclick="next()">Softer 🥹</button>
+    <button onclick="next()">Happier 🌸</button>
+    <button onclick="next()">Completely yours ❤️</button>
+  </div>
+</section>
+
+<section id="quiz">
+  <h1>Memory check 📸</h1>
+  <p>What makes our relationship special?</p>
+  <div class="options">
+    <button onclick="next()">Our memories 💭</button>
+    <button onclick="next()">Our understanding 🤍</button>
+    <button onclick="next()">Us, just us 🥰</button>
+  </div>
+</section>
+
+<section id="quiz">
+  <h1>Think carefully 😏</h1>
+  <p>If I’m sad, what do you do?</p>
+  <div class="options">
+    <button onclick="next()">Listen patiently 👂</button>
+    <button onclick="next()">Hug me tight 🤗</button>
+    <button onclick="next()">Never leave ❤️</button>
+  </div>
+</section>
+
+<section id="quiz">
+  <h1>Almost there 🥹</h1>
+  <p>What are we building together?</p>
+  <div class="options">
+    <button onclick="next()">Love 💕</button>
+    <button onclick="next()">Memories 📖</button>
+    <button onclick="next()">A future 🏡</button>
+    <button onclick="next()">All of the above 🥹 </button>
+  </div>
+</section>
+
+<section id="quiz">
+  <h1>One last thing… 🥺</h1>
+  <p>Will you stay with me, always?</p>
+  <div class="options">
+  <button onclick="finishQuiz()">Always ❤️</button>
+  <button onclick="finishQuiz()">Forever 💍</button>
+  <button onclick="finishQuiz()">There’s no other option 😘</button>
+  </div>
+
+  <p id="quizDone" style="display:none; margin-top:20px;">
+     Quiz complete 💖
+  </p>
+
+</section>
+
+<!-- GIFT 2: PHOTOS -->
+<section id="photos">
+  <h1 class="section-title">Our Memories 💖</h1>
+
+<div class="carousel">
+  <button class="arrow left" onclick="prevPhoto(event)">❮</button>
+
+  <div class="carousel-stage">
+    <img src="https://i.imgur.com/xzJLiFl.jpeg " class="photo">
+    <img src="https://i.imgur.com/6ctjZWF.jpeg " class="photo">
+    <img src="https://i.imgur.com/dyJ7u9b.jpeg " class="photo">
+    <img src="https://i.imgur.com/xzJLiFl.jpeg " class="photo">
+    <img src="https://i.imgur.com/6ctjZWF.jpeg " class="photo">
+    <img src="https://i.imgur.com/dyJ7u9b.jpeg" class="photo">
+    <img src="https://i.imgur.com/xzJLiFl.jpeg " class="photo">
+    <img src="https://i.imgur.com/6ctjZWF.jpeg " class="photo">
+    <img src="https://i.imgur.com/dyJ7u9b.jpeg" class="photo">
+    <img src="https://i.imgur.com/xzJLiFl.jpeg " class="photo">
+    <img src="https://i.imgur.com/6ctjZWF.jpeg " class="photo">
+    <img src="https://i.imgur.com/dyJ7u9b.jpeg" class="photo">
+    <img src="https://i.imgur.com/xzJLiFl.jpeg " class="photo">
+    <img src="https://i.imgur.com/6ctjZWF.jpeg " class="photo">
+    <!-- add all 17 photos here -->
+  </div>
+
+  <button class="arrow right" onclick="nextPhoto(event)">❯</button>
+</div>
+
+
+    <button class="cute-btn ghost" onclick="backToGifts()">← Back</button>
+</section>
+
+
+<!-- GIFT 3: WRITING -->
+<section id="letter">
+  <h1>For You 💌</h1>
+  <div class="card">
+    <p>
+      In your eyes, I have found a home where my soul finally feels at rest.
+      Every moment spent with you is a beautiful reminder that true happiness
+      exists, and I am so grateful to walk this path by your side.
+      <br><br>
+      You are the melody that my heart beats to and the light that guides me
+      through every storm. Thank you for loving me so completely and for making
+      even the simplest days feel like a dream come true.
+      <br><br>
+      I love you more than words could ever express, now and for all the days
+      to come.
+    </p>
+  </div>
+  <button class="cute-btn" onclick="backToGifts()">⬅ Back</button>
+</section>
+
+<!-- FINAL -->
+<section id="final">
+  <h1 class="final-title">Happy Valentine’s Day Babe❤️</h1>
+  <p class="final-text">You mean everything to me.</p>
+
+  <p class="final-text" id="typingText"></p>
+
+  <p class="promise" id="promise">Forever yours 💍</p>
+
+  <div id="hearts"></div>
+  <button class="home-btn" onclick="go('intro')">
+      💌 Start Us Again?
+  </button>
+
+</section>
+
+
+
+
+<script>
+let i = 0;
+const sections = document.querySelectorAll("section");
+
+function next() {
+  sections[i].classList.remove("active");
+  i++;
+  sections[i].classList.add("active");
+
+  if (sections[i].id === "final") {
+    startHearts();
+
+    const promise = document.getElementById("promise");
+    if (promise) {
+      promise.classList.remove("show"); // reset
+
+      setTimeout(() => {
+        promise.classList.add("show");
+      }, 2000); // ⏳ 2s delay (adjust if you want)
+    }
+  } else {
+    stopHearts();
+  }
+}
+
+
+function go(id) {
+  sections[i].classList.remove("active");
+  i = [...sections].findIndex(s => s.id === id);
+  sections[i].classList.add("active");
+
+  if (id === "final") {
+    startHearts();
+  } else {
+    stopHearts();
+  }
+}
+
+
+
+function backToGifts() {
+  sections[i].classList.remove("active");
+  i = 1; // Gifts page
+  sections[i].classList.add("active");
+  stopHearts();
+}
+
+
+/* slideshow */
+let s = 0;
+setInterval(() => {
+  const slides = document.querySelectorAll(".slide");
+  if (!slides.length) return;
+  slides[s].classList.remove("active");
+  s = (s + 1) % slides.length;
+  slides[s].classList.add("active");
+}, 2500);
+
+function finishQuiz() {
+  // show "Quiz complete 💖"
+  const msg = document.getElementById("quizDone");
+  if (msg) msg.style.display = "block";
+
+  // create tiny heart
+  const heart = document.createElement("div");
+  heart.className = "pop-heart";
+  heart.innerText = "💖";
+  heart.style.left = "50%";
+  heart.style.top = "60%";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 800);
+
+  // go back to gifts after a short pause
+  setTimeout(() => {
+    backToGifts();
+  }, 1200);
+}
+
+
+let heartInterval = null;
+
+function startHearts() {
+  const hearts = document.getElementById("hearts");
+  if (!hearts) return;
+
+  stopHearts(); // safety reset
+
+  heartInterval = setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.textContent = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    hearts.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 4000);
+  }, 300);
+}
+
+function stopHearts() {
+  if (heartInterval) {
+    clearInterval(heartInterval);
+    heartInterval = null;
+  }
+}
+
+
+function typeForeverText() {
+  const text = "Forever yours 💍";
+  const el = document.getElementById("typingText");
+  el.innerHTML = "";
+  let idx = 0;
+
+  const typing = setInterval(() => {
+    el.innerHTML += text[idx];
+    idx++;
+    if (idx === text.length) clearInterval(typing);
+  }, 120);
+}
+
+
+const photos = document.querySelectorAll(".photo");
+let current = 0;
+
+function updateCarousel() {
+  photos.forEach(p => p.className = "photo");
+
+  const prev = (current - 1 + photos.length) % photos.length;
+  const next = (current + 1) % photos.length;
+
+  photos[current].classList.add("center");
+  photos[prev].classList.add("left");
+  photos[next].classList.add("right");
+}
+
+function nextPhoto(e) {
+  if (e) heartSparkle(e.clientX, e.clientY);
+  current = (current + 1) % photos.length;
+  updateCarousel();
+}
+
+function prevPhoto(e) {
+  if (e) heartSparkle(e.clientX, e.clientY);
+  current = (current - 1 + photos.length) % photos.length;
+  updateCarousel();
+}
+
+
+updateCarousel();
+
+
+function heartSparkle(x, y) {
+  const heart = document.createElement("div");
+  heart.className = "sparkle";
+  heart.innerText = "💖";
+  heart.style.left = x + "px";
+  heart.style.top = y + "px";
+
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 800);
+}
+
+
+function goHome() {
+  document.body.classList.add("fade-out");
+
+  setTimeout(() => {
+    document.body.classList.remove("fade-out");
+
+    sections[i].classList.remove("active");
+    i = 0;
+    sections[i].classList.add("active");
+
+    document.body.classList.add("fade-in");
+    stopHearts();
+
+    setTimeout(() => {
+      document.body.classList.remove("fade-in");
+    }, 600);
+  }, 500);
+}
+
+
+</script>
+
+</body>
+</html>
