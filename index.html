@@ -618,17 +618,18 @@ body.fade-in {
  <section id="login" class="active login">
   <h1>Just for you 💖</h1>
   <p>Only my favorite person can enter</p>
-
-  <input type="text" id="username" placeholder="Your nickname 🥰">
-  <input type="password" id="password" placeholder="Our secret 💌">
+  <form onsubmit="checkLogin(); return false;">
+  <input type="text" id="username" placeholder="Your nickname 🥰" autocapitalize="off" autocomplete="off">
+  <input type="password" id="password" placeholder="The moment you are mine 💌">
 
   <button class="cute-btn" onclick="checkLogin()">Unlock 💗</button>
+  </form>
 
   <p id="loginError" class="error">Hmm… that doesn’t feel right 💔</p>
 </section>
  
 <!-- INTRO -->
-<section id="intro" class="active">
+<section id="intro">
   <h1>Hey Aammiiii... ❤️</h1>
   <p>I made something just for you…</p>
   <button class="cute-btn" onclick="next()">Start 💌</button>
@@ -1041,27 +1042,26 @@ function checkLogin() {
   const pass = document.getElementById("password").value.trim();
   const error = document.getElementById("loginError");
 
-  // ✨ CHANGE THESE ✨
-  const correctUser = "Aami";      // her nickname (lowercase)
-  const correctPass = "201024";    // cute secret (date / word)
+  const correctUser = "aami";
+  const correctPass = "201024";
 
   if (user === correctUser && pass === correctPass) {
     error.style.display = "none";
 
-    // smooth transition
-    sections[i].classList.remove("active");
-    i = 1; // intro page index
-    sections[i].classList.add("active");
+    // ✅ move to intro page safely
+    go("intro");
   } else {
     error.style.display = "block";
   }
 }
+
 
   
 </script>
 
 </body>
 </html>
+
 
 
 
