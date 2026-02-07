@@ -92,6 +92,27 @@ button {
   transform: rotateY(180deg);
 }
 
+.gift-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* space between emoji & text */
+}
+
+/* Big centered emoji */
+.gift-emoji {
+  font-size: 44px; /* BIG & cute */
+  line-height: 1;
+}
+
+/* Smaller text below */
+.gift-text {
+  font-size: 12px; /* smaller than emoji */
+  font-weight: 550;
+  opacity: 0.8;
+}
+  
 .gift-front,
 .gift-back {
   position: absolute;
@@ -642,21 +663,33 @@ body.fade-in {
   <div class="gifts">
     <div class="flip" onclick="go('quiz')">
       <div class="gift-inner">
-        <div class="gift-front">Gift 1🎁</div>
+        <div class="gift-front">
+            <div class="gift-emoji">🎁</div>
+            <div class="gift-text">Gift 1</div>
+        </div>
+
         <div class="gift-back">Quiz 💕</div>
       </div>
     </div>
 
     <div class="flip" onclick="go('photos')">
       <div class="gift-inner">
-        <div class="gift-front">Gift2🎁</div>
+        <div class="gift-front">
+          <div class="gift-emoji">🎁</div>
+          <div class="gift-text">Gift 2</div>
+        </div>
+
         <div class="gift-back">Us 📸</div>
       </div>
     </div>
 
     <div class="flip" onclick="go('letter')">
       <div class="gift-inner">
-        <div class="gift-front">Gift 3🎁</div>
+       <div class="gift-front">
+          <div class="gift-emoji">🎁</div>
+          <div class="gift-text">Gift 3</div>
+        </div>
+
         <div class="gift-back">For You 💌</div>
       </div>
     </div>
@@ -1060,6 +1093,7 @@ function checkLogin() {
 
 </body>
 </html>
+
 
 
 
