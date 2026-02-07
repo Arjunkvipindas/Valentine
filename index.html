@@ -580,6 +580,33 @@ body.fade-in {
   background: rgba(255, 255, 255, 0.25);
 }
 
+
+
+
+.login {
+  text-align: center;
+}
+
+.login input {
+  display: block;
+  margin: 12px auto;
+  padding: 12px 16px;
+  width: 75%;
+  max-width: 260px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.error {
+  display: none;
+  color: #ff4d6d;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+  
 </style>
 </head>
 
@@ -587,6 +614,19 @@ body.fade-in {
 
 <body>
 
+<!-- LOGIN -->
+ <section id="login" class="active login">
+  <h1>Just for you 💖</h1>
+  <p>Only my favorite person can enter</p>
+
+  <input type="text" id="username" placeholder="Your nickname 🥰">
+  <input type="password" id="password" placeholder="Our secret 💌">
+
+  <button class="cute-btn" onclick="checkLogin()">Unlock 💗</button>
+
+  <p id="loginError" class="error">Hmm… that doesn’t feel right 💔</p>
+</section>
+ 
 <!-- INTRO -->
 <section id="intro" class="active">
   <h1>Hey Aammiiii... ❤️</h1>
@@ -995,10 +1035,33 @@ function goHome() {
   }, 500);
 }
 
+  
+function checkLogin() {
+  const user = document.getElementById("username").value.trim().toLowerCase();
+  const pass = document.getElementById("password").value.trim();
+  const error = document.getElementById("loginError");
 
+  // ✨ CHANGE THESE ✨
+  const correctUser = "Aami";      // her nickname (lowercase)
+  const correctPass = "201024";    // cute secret (date / word)
+
+  if (user === correctUser && pass === correctPass) {
+    error.style.display = "none";
+
+    // smooth transition
+    sections[i].classList.remove("active");
+    i = 1; // intro page index
+    sections[i].classList.add("active");
+  } else {
+    error.style.display = "block";
+  }
+}
+
+  
 </script>
 
 </body>
 </html>
+
 
 
