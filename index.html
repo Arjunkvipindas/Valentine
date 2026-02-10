@@ -964,7 +964,7 @@ function finishQuiz() {
   const msg = document.getElementById("quizDone");
   if (msg) msg.style.display = "block";
 
-  // create tiny heart
+  // tiny heart pop
   const heart = document.createElement("div");
   heart.className = "pop-heart";
   heart.innerText = "💖";
@@ -974,11 +974,12 @@ function finishQuiz() {
 
   setTimeout(() => heart.remove(), 800);
 
-  // go back to gifts after a short pause
+  // go back to gifts page (safe)
   setTimeout(() => {
-    backToGifts();
+    go("gifts");
   }, 1200);
 }
+
 
 
 let heartInterval = null;
@@ -1108,6 +1109,7 @@ function checkLogin() {
 
 </body>
 </html>
+
 
 
 
