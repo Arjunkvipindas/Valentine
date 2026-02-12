@@ -697,6 +697,43 @@ body.fade-in {
   }
 }
 
+#secretOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s ease;
+  z-index: 1000;
+}
+
+#secretOverlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.secret-box {
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+  padding: 30px;
+  border-radius: 24px;
+  max-width: 320px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  animation: popIn 0.4s ease;
+}
+
+.secret-box h2 {
+  margin-top: 0;
+}
+
+.secret-box button {
+  margin-top: 20px;
+}
 
 
   
@@ -843,6 +880,21 @@ body.fade-in {
 
   <button class="cute-btn" onclick="go('final')">Next 💕</button>
   <button class="cute-btn" onclick="go('gifts')">⬅ Back</button>
+
+  <div id="secretOverlay">
+  <div class="secret-box">
+    <h2>You found it… 💖</h2>
+    <p>
+      Just like this hidden surprise,  
+      you are the best unexpected blessing in my life.  
+      <br><br>
+      I would choose you again. And again. And again. ❤️
+    </p>
+    <button onclick="closeSecret()">Close 💕</button>
+  </div>
+</div>
+
+  
 </section>
 
 
@@ -1265,11 +1317,36 @@ function revealCard(card) {
   }
 }
 
+
+let pressTimer;
+const whySection = document.getElementById("why");
+
+whySection.addEventListener("touchstart", startPress);
+whySection.addEventListener("mousedown", startPress);
+
+whySection.addEventListener("touchend", cancelPress);
+whySection.addEventListener("mouseup", cancelPress);
+
+function startPress() {
+  pressTimer = setTimeout(() => {
+    document.getElementById("secretOverlay").classList.add("show");
+  }, 1500); // 2 seconds hold
+}
+
+function cancelPress() {
+  clearTimeout(pressTimer);
+}
+
+function closeSecret() {
+  document.getElementById("secretOverlay").classList.remove("show");
+}
+  
   
 </script>
 
 </body>
 </html>
+
 
 
 
