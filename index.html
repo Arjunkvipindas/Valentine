@@ -633,8 +633,8 @@ body.fade-in {
  /* WHY I LOVE YOU PAGE */
 .why-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(4, 1fr); /* Laptop default */
+  gap: 16px;
   margin: 30px auto;
   max-width: 1000px;
 }
@@ -679,6 +679,21 @@ body.fade-in {
 
 .why-card.revealed .curtain {
   transform: translateY(-100%);
+}
+
+@media (max-width: 768px) {
+  .why-grid {
+    grid-template-columns: repeat(3, 1fr); /* Mobile */
+  }
+
+  .why-card {
+    min-height: 85px;
+    font-size: 12px;
+  }
+
+  .why-text {
+    font-size: 12px;
+  }
 }
 
 
@@ -806,6 +821,15 @@ body.fade-in {
     <div class="why-card" onclick="revealCard(this)">
       <div class="curtain">💗</div>
       <div class="why-text">You love me in ways I never knew I needed.</div>
+    </div>
+    <div class="why-card" onclick="revealCard(this)">
+      <div class="curtain">💗</div>
+      <div class="why-text">You make even silence feel comfortable.</div>
+    </div>
+
+    <div class="why-card" onclick="revealCard(this)">
+      <div class="curtain">💗</div>
+      <div class="why-text">With you, love feels easy and real.</div>
     </div>
 
     <div class="why-card" onclick="revealCard(this)">
@@ -1244,6 +1268,7 @@ function revealCard(card) {
 
 </body>
 </html>
+
 
 
 
