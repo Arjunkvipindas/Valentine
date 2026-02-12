@@ -890,6 +890,7 @@ body.fade-in {
       <br><br>
       I would choose you again. And again. And again. ❤️
     </p>
+    <p id="foreverCounter" style="margin-top:15px; font-weight:600;"></p>
     <button onclick="closeSecret()">Close 💕</button>
   </div>
 </div>
@@ -1330,6 +1331,7 @@ whySection.addEventListener("mouseup", cancelPress);
 function startPress() {
   pressTimer = setTimeout(() => {
     document.getElementById("secretOverlay").classList.add("show");
+updateForeverCounter();
   }, 1500); // 2 seconds hold
 }
 
@@ -1341,11 +1343,28 @@ function closeSecret() {
   document.getElementById("secretOverlay").classList.remove("show");
 }
   
+
+ function updateForeverCounter() {
+  // 💖 CHANGE THIS DATE
+  const startDate = new Date("2024-10-20"); // YYYY-MM-DD
+  
+  const today = new Date();
+  
+  const diffTime = today - startDate;
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  
+  const counter = document.getElementById("foreverCounter");
+  if (counter) {
+    counter.innerHTML = `💞 ${diffDays} days of us... and counting forever.`;
+  }
+}
+
   
 </script>
 
 </body>
 </html>
+
 
 
 
