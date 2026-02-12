@@ -735,6 +735,16 @@ body.fade-in {
   margin-top: 20px;
 }
 
+.forever-card {
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.3);
+}
 
   
 </style>
@@ -890,7 +900,7 @@ body.fade-in {
       <br><br>
       I would choose you again. And again. And again. ❤️
     </p>
-    <p id="foreverCounter" style="margin-top:15px; font-weight:600;"></p>
+    <p id="foreverCounter" class="forever-card" style="margin-top:15px; font-weight:600;"></p>
     <button onclick="closeSecret()">Close 💕</button>
   </div>
 </div>
@@ -1355,7 +1365,13 @@ function closeSecret() {
   
   const counter = document.getElementById("foreverCounter");
   if (counter) {
-    counter.innerHTML = `💞 ${diffDays} days of us... and counting forever.`;
+    counter.innerHTML = `
+  💖 <strong>${diffDays}</strong> days together<br>
+  <span style="font-size:0.85rem; opacity:0.9;">
+    and counting forever…
+  </span>
+`;
+
   }
 }
 
@@ -1364,6 +1380,7 @@ function closeSecret() {
 
 </body>
 </html>
+
 
 
 
