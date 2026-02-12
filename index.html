@@ -746,6 +746,14 @@ body.fade-in {
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.3);
 }
 
+ #musicToggle {
+  transition: 0.3s ease;
+}
+
+#musicToggle:hover {
+  transform: scale(1.1);
+}
+
   
 </style>
 </head>
@@ -1309,8 +1317,10 @@ function checkLogin() {
   if (user === correctUser && pass === correctPass) {
     error.style.display = "none";
 const music = document.getElementById("bgMusic");
+    const btn = document.getElementById("musicToggle");
     music.volume = 0.4;   // soft romantic volume
     music.play().catch(() => {});
+    btn.style.display = "block";   // 👈 SHOW BUTTON AFTER LOGIN
     // ✅ move to intro page safely
     go("intro");
   } else {
@@ -1377,16 +1387,48 @@ function closeSecret() {
   }
 }
 
-  
+ function toggleMusic() {
+  const music = document.getElementById("bgMusic");
+  const btn = document.getElementById("musicToggle");
+
+  if (music.paused) {
+    music.play();
+    btn.innerHTML = "🎵";
+  } else {
+    music.pause();
+    btn.innerHTML = "🔇";
+  }
+}
+ 
 </script>
 
 
 <audio id="bgMusic" loop>
   <source src="love.mp3" type="audio/mpeg">
 </audio>
+
+ <button id="musicToggle" onclick="toggleMusic()" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  border: none;
+  background: white;
+  color: #e75480;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+  display: none;
+  z-index: 1000;
+">
+🎵
+</button>
  
 </body>
 </html>
+
 
 
 
