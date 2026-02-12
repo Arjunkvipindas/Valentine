@@ -681,20 +681,22 @@ body.fade-in {
   transform: translateY(-100%);
 }
 
+/* Mobile layout */
 @media (max-width: 768px) {
   .why-grid {
-    grid-template-columns: repeat(3, 1fr); /* Mobile */
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 
   .why-card {
     min-height: 85px;
-    font-size: 12px;
+    padding: 14px 8px;
   }
 
   .why-text {
     font-size: 12px;
   }
 }
+
 
 
   
@@ -1268,6 +1270,7 @@ function revealCard(card) {
 
 </body>
 </html>
+
 
 
 
